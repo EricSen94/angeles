@@ -1,0 +1,28 @@
+name: Run Jest Tests
+
+on:
+  push:
+    branches: ['main', 'develop']
+  pull_request:
+    branches: ['main', 'develop']
+
+jobs:
+  test:
+    name: Test with Jest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'          # ajusta a tu versión
+          cache: 'npm'                # o 'yarn' si usas Yarn
+
+      - name: Install dependencies
+        run: npm ci                  # o `npm install` / `yarn install`
+
+      - name: Run tests
+        run: npm test -- --coverage  # asegúrate de que `npm test` ejecute Jest
