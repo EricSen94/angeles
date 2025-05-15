@@ -1,4 +1,5 @@
 // src/features/appSlice.test.ts
+import { Category } from "entities/categories/categories.types";
 import appReducer, {
   addCategory,
   updateCategory,
@@ -7,10 +8,9 @@ import appReducer, {
   updateTask,
   removeTask,
   toggleTaskCompleted,
-  Category,
-  Task,
 } from "./appSlice";
 import type { AppState } from "./appSlice";
+import { Task } from "entities/task/task.types";
 
 describe("appSlice reducer", () => {
   const initialState: AppState = { categories: [], tasks: [] };
