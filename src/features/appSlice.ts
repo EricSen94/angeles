@@ -1,4 +1,3 @@
-// src/features/appSlice.ts
 import { createSlice, PayloadAction, nanoid } from '@reduxjs/toolkit'
 
 export interface Category {
@@ -15,7 +14,7 @@ export interface Task {
   completed: boolean
 }
 
-interface AppState {
+export interface AppState {
   categories: Category[]
   tasks: Task[]
 }
@@ -29,7 +28,6 @@ const appSlice = createSlice({
   name: 'app',
   initialState,
   reducers: {
-    // CATEGORIAS
     addCategory(
       state,
       action: PayloadAction<{ name: string; color: string }>
@@ -54,7 +52,6 @@ const appSlice = createSlice({
       state.tasks      = state.tasks.filter(t => t.categoryId !== action.payload)
     },
 
-    // TAREAS
     addTask(
       state,
       action: PayloadAction<{
