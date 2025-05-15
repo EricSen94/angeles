@@ -4,7 +4,7 @@ import { CategoryList } from './components/organisms/testParaStore';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App" data-testid="principal-div">
       <CategoryList />
     </div>
   );

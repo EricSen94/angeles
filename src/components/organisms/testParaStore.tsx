@@ -10,10 +10,7 @@ import { selectAllTasks, selectCategories } from "../../features/selectors";
 import {
   Box,
   Button,
-  FormControl,
   Grid,
-  Input,
-  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
