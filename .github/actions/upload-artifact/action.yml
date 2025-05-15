@@ -1,5 +1,5 @@
 name: "Upload Artifact"
-description: "Wrapper local para subir artefactos (coverage) usando actions/upload-artifact@v3"
+description: "Wrapper local para subir artefactos (coverage) usando actions/upload-artifact@v4"
 inputs:
   name:
     description: "Nombre del artifact"
@@ -12,7 +12,7 @@ runs:
   using: "composite"
   steps:
     - name: Upload coverage report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ${{ inputs.name }}
         path: ${{ inputs.path }}
