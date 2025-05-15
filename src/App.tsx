@@ -1,11 +1,10 @@
-import React from 'react';
-import './App.css';
-import { CategoryList } from './components/organisms/testParaStore/testParaStore';
+import "./App.css";
+import TaskScreen from "screens/taskScreen/taskScreen";
 
 function App() {
   return (
     <div className="App" data-testid="principal-div">
-      <CategoryList />
+      <TaskScreen />
     </div>
   );
 }
