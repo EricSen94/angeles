@@ -1,0 +1,18 @@
+name: "Upload Artifact"
+description: "Wrapper local para subir artefactos (coverage) usando actions/upload-artifact@v3"
+inputs:
+  name:
+    description: "Nombre del artifact"
+    required: true
+  path:
+    description: "Ruta de los archivos a subir (puede usar globs)"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: ${{ inputs.name }}
+        path: ${{ inputs.path }}
