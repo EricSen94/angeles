@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>0/3</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -109,7 +109,22 @@
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,7 +144,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,7 +156,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,6 +195,7 @@ import { Category } from "entities/categories/categories.types";
 import { TaskWithColor, TaskWithColorArray } from "entities/task/task.types";
 import TaskBoard from "components/organisms/tasksBoard/taskBoard";
 import HeaderBar from "components/organisms/headerBar/headerBar";
+import AddTaskModal from "components/organisms/addTaskModal/addTaskModal";
 &nbsp;
 interface TaskTemplateProps {
   tasksWithColor: TaskWithColor[];
@@ -172,22 +203,36 @@ interface TaskTemplateProps {
   finishTask: (id: string) =&gt; void;
   showCompletedTask: boolean;
   setShowCompletedTask: (showCompletedTask: boolean) =&gt; void;
-  addTask: () =&gt; void;
+  openModal: () =&gt; void;
+  showAddTask: boolean;
+  hideModal: () =&gt; void;
+  addTask: (name: string, category: string, description: string) =&gt; void;
 }
 &nbsp;
-const TaskTemplate = ({
+const TaskTemplate = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span></span>
   tasksWithColor,
   categories,
   finishTask,
   showCompletedTask,
   setShowCompletedTask,
+  openModal,
+  showAddTask,
+  hideModal,
   addTask,
 }: TaskTemplateProps) =&gt; {
-  return (
+<span class="cstat-no" title="statement not covered" >  return (</span>
     &lt;div data-testid="task-template"&gt;
+      &lt;AddTaskModal
+        open={showAddTask}
+        categories={categories}
+        onClose={hideModal}
+        onSubmit={<span class="fstat-no" title="function not covered" >({</span> name, category, description }) =&gt;
+<span class="cstat-no" title="statement not covered" >          addTask(name, category, description)</span>
+        }
+      /&gt;
       &lt;HeaderBar /&gt;
       &lt;Grid container spacing={2} sx={{ justifyContent: "center" }}&gt;
-        &lt;TaskHeader addTask={addTask} /&gt;
+        &lt;TaskHeader openModal={openModal} /&gt;
         &lt;CategoriesList categories={categories} /&gt;
         &lt;TaskBoard
           tasksWithColor={tasksWithColor}
@@ -208,7 +253,7 @@ export default TaskTemplate;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-15T22:10:25.550Z
+                at 2025-05-15T23:38:36.222Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

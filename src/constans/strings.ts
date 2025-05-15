@@ -7,4 +7,12 @@ export const STRINGS = {
   completedTask: "Tareas finalizadas",
   task: "Mis tareas",
   addTask: "Agregar tarea",
+  addTaskModal: {
+    title: "Agregar tarea",
+    name: "Nombre de la tarea",
+    description: "Descripción",
+    category: "Selecciona catgoría",
+    add: "Agregar",
+    cancel: "Cancelar",
+  },
 };

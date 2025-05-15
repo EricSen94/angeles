@@ -2,10 +2,10 @@ import { STRINGS } from "constans/strings";
 import { Button, Grid, Typography } from "@mui/material";
 
 interface TaskHeaderProps {
-  addTask: () => void;
+  openModal: () => void;
 }
 
-const TaskHeader = ({ addTask }: TaskHeaderProps) => {
+const TaskHeader = ({ openModal }: TaskHeaderProps) => {
   return (
     <Grid
       container
@@ -44,7 +44,7 @@ const TaskHeader = ({ addTask }: TaskHeaderProps) => {
 
             fontSize: "16",
           }}
-          onClick={addTask}
+          onClick={openModal}
         >
           {STRINGS.addTask}
         </Button>

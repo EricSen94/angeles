@@ -8,6 +8,7 @@ import { Category } from "entities/categories/categories.types";
 import { TaskWithColor, TaskWithColorArray } from "entities/task/task.types";
 import TaskBoard from "components/organisms/tasksBoard/taskBoard";
 import HeaderBar from "components/organisms/headerBar/headerBar";
+import AddTaskModal from "components/organisms/addTaskModal/addTaskModal";
 
 interface TaskTemplateProps {
   tasksWithColor: TaskWithColor[];
@@ -15,7 +16,10 @@ interface TaskTemplateProps {
   finishTask: (id: string) => void;
   showCompletedTask: boolean;
   setShowCompletedTask: (showCompletedTask: boolean) => void;
-  addTask: () => void;
+  openModal: () => void;
+  showAddTask: boolean;
+  hideModal: () => void;
+  addTask: (name: string, category: string, description: string) => void;
 }
 
 const TaskTemplate = ({
@@ -24,13 +28,24 @@ const TaskTemplate = ({
   finishTask,
   showCompletedTask,
   setShowCompletedTask,
+  openModal,
+  showAddTask,
+  hideModal,
   addTask,
 }: TaskTemplateProps) => {
   return (
     <div data-testid="task-template">
+      <AddTaskModal
+        open={showAddTask}
+        categories={categories}
+        onClose={hideModal}
+        onSubmit={({ name, category, description }) =>
+          addTask(name, category, description)
+        }
+      />
       <HeaderBar />
       <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-        <TaskHeader addTask={addTask} />
+        <TaskHeader openModal={openModal} />
         <CategoriesList categories={categories} />
         <TaskBoard
           tasksWithColor={tasksWithColor}
