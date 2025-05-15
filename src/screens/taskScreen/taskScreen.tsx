@@ -1,6 +1,6 @@
 import TaskTemplate from "components/templates/taskTemplate/taskTemplate";
 import { TaskWithColor } from "entities/task/task.types";
-import { updateTask } from "features/appSlice";
+import { addTask, updateTask } from "features/appSlice";
 import { selectAllTasks, selectCategories } from "features/selectors";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ const TaskScreen = () => {
   const categories = useAppSelector(selectCategories);
   const [tasks, setTasks] = useState<TaskWithColor[]>([]);
   const [showCompletedTask, setShowCompletedTask] = useState(false);
+  const [showAddTask, setShowAddTask] = useState(false);
 
   useEffect(() => {
     const tasksWithColor = savedTask.map((task) => {
@@ -34,11 +35,19 @@ const TaskScreen = () => {
       })
     );
   };
-
-  const handleAddTask = () => {
-    return null;
+  const handleAddTask = (
+    name: string,
+    category: string,
+    description: string
+  ) => {
+    dispatch(addTask({ title: name, categoryId: category, description }));
   };
-
+  const hanldeOpenModal = () => {
+    setShowAddTask(true);
+  };
+  const hanldeCloseModal = () => {
+    setShowAddTask(false);
+  };
   return (
     <TaskTemplate
       tasksWithColor={tasks}
@@ -47,6 +56,9 @@ const TaskScreen = () => {
       showCompletedTask={showCompletedTask}
       setShowCompletedTask={setShowCompletedTask}
       addTask={handleAddTask}
+      openModal={hanldeOpenModal}
+      showAddTask={showAddTask}
+      hideModal={hanldeCloseModal}
     />
   );
 };

@@ -20,6 +20,9 @@ describe("TaskTemplate", () => {
         showCompletedTask={false}
         setShowCompletedTask={onclick}
         addTask={onclick}
+        openModal={onclick}
+        showAddTask={false}
+        hideModal={onclick}
       />
     );
     expect(screen.getByTestId("task-template")).toBeInTheDocument();
