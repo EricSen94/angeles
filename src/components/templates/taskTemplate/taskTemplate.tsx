@@ -12,33 +12,35 @@ import HeaderBar from "components/organisms/headerBar/headerBar";
 interface TaskTemplateProps {
   tasksWithColor: TaskWithColor[];
   categories: Category[];
-  onclick: (id: string) => void;
+  finishTask: (id: string) => void;
   showCompletedTask: boolean;
   setShowCompletedTask: (showCompletedTask: boolean) => void;
+  addTask: () => void;
 }
 
 const TaskTemplate = ({
   tasksWithColor,
   categories,
-  onclick,
+  finishTask,
   showCompletedTask,
   setShowCompletedTask,
+  addTask,
 }: TaskTemplateProps) => {
   return (
-    <>
+    <div data-testid="task-template">
       <HeaderBar />
       <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-        <TaskHeader />
+        <TaskHeader addTask={addTask} />
         <CategoriesList categories={categories} />
         <TaskBoard
           tasksWithColor={tasksWithColor}
-          onclick={onclick}
+          finishTask={finishTask}
           showCompletedTask={showCompletedTask}
           setShowCompletedTask={setShowCompletedTask}
         />
         <Grid size={1} />
       </Grid>
-    </>
+    </div>
   );
 };
 export default TaskTemplate;

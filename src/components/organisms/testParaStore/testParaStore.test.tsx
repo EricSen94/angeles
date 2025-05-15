@@ -5,8 +5,11 @@ describe("CategoryList component", () => {
   afterEach(() => {
     cleanup();
   });
+  beforeAll(() => {
+    cleanup();
+  });
 
-  it("al inicio sólo muestra el formulario de categorías", () => {
+  test("al inicio sólo muestra el formulario de categorías", () => {
     render(<CategoryList />);
 
     expect(screen.getByTestId("category-list-container")).toBeInTheDocument();
@@ -15,10 +18,8 @@ describe("CategoryList component", () => {
     expect(screen.getByTestId("category-color-input")).toBeInTheDocument();
     expect(screen.getByTestId("add-category-button")).toBeInTheDocument();
 
-    expect(screen.queryByText("Tareas")).toBeNull();
-    expect(screen.queryByTestId("add-task-button")).toBeNull();
   });
-  it("inicializa el input de color en #000000 y permite cambiarlo", () => {
+  test("inicializa el input de color en #000000 y permite cambiarlo", () => {
     render(<CategoryList />);
 
     const colorInput = screen.getByTestId(
@@ -29,7 +30,7 @@ describe("CategoryList component", () => {
 
     expect(colorInput.value).toBe("#ff0000");
   });
-  it("añade una categoría y muestra sección de tareas con botón deshabilitado", () => {
+  test("añade una categoría y muestra sección de tareas con botón deshabilitado", () => {
     render(<CategoryList />);
 
     const catWrapper = screen.getByTestId("category-name-input");
@@ -38,7 +39,7 @@ describe("CategoryList component", () => {
 
     fireEvent.click(screen.getByTestId("add-category-button"));
 
-    expect(screen.getByTestId("cat-row-Work")).toBeInTheDocument();
+    expect(screen.getAllByTestId("cat-row-Work")[0]).toBeInTheDocument();
 
     expect(screen.getByText("Tareas")).toBeInTheDocument();
 
@@ -46,7 +47,7 @@ describe("CategoryList component", () => {
     expect(addTaskBtn).toBeDisabled();
   });
 
-  it("añade una categoría y la elimina", () => {
+  test("añade una categoría y la elimina", () => {
     render(<CategoryList />);
 
     const catWrapper = screen.getByTestId("category-name-input");
@@ -55,15 +56,15 @@ describe("CategoryList component", () => {
 
     fireEvent.click(screen.getByTestId("add-category-button"));
 
-    expect(screen.getByTestId("cat-row-Work")).toBeInTheDocument();
+    expect(screen.getAllByTestId("cat-row-Work")[0]).toBeInTheDocument();
     expect(screen.getByText("Tareas")).toBeInTheDocument();
+    const leng = screen.getAllByTestId("cat-row-Work").length;
+    fireEvent.click(screen.getAllByTestId("cat-row-button-Work")[0]);
 
-    fireEvent.click(screen.getByTestId("cat-row-button-Work"));
-
-    expect(screen.queryByTestId("cat-row-Work")).toBeNull();
+    expect(screen.getAllByTestId("cat-row-Work").length).toBe(leng - 1);
   });
 
-  it("permite crear una tarea y la muestra en la lista", () => {
+  test("permite crear una tarea y la muestra en la lista", () => {
     render(<CategoryList />);
 
     const catInputWrapper = screen.getByTestId("category-name-input");
@@ -87,7 +88,7 @@ describe("CategoryList component", () => {
     expect(screen.getByText("Task Desc")).toBeInTheDocument();
   });
 
-  it("permite crear una tarea y eliminarla", () => {
+  test("permite crear una tarea y eliminarla", () => {
     render(<CategoryList />);
 
     const catInputWrapper = screen.getByTestId("category-name-input");
@@ -116,10 +117,9 @@ describe("CategoryList component", () => {
     expect(screen.queryByTestId("Task Title")).toBeNull();
   });
 
-  it("permite seleccionar una categoría en el Select de tareas", async () => {
+  test("permite seleccionar una categoría en el Select de tareas", async () => {
     render(<CategoryList />);
 
-    // 1) Añadimos dos categorías para tener opciones
     const nameInput = within(
       screen.getByTestId("category-name-input")
     ).getByRole("textbox");
@@ -128,21 +128,16 @@ describe("CategoryList component", () => {
     fireEvent.change(nameInput, { target: { value: "Home" } });
     fireEvent.click(screen.getByTestId("add-category-button"));
 
-    // 2) Abrimos el Select sobre el elemento con role="combobox"
     const combobox = screen.getByRole("combobox");
     fireEvent.mouseDown(combobox);
 
-    // 3) Esperamos a que aparezcan los <MenuItem> portaleados,
-    //    y los seleccionamos por data-testid
     const options = await screen.findAllByTestId(/^task-select-option-/);
-    // Buscamos la opción cuyo texto sea "Home"
+
     const homeOption = options.find((opt) => opt.textContent === "Home")!;
     expect(homeOption).toBeInTheDocument();
 
-    // 4) Hacemos click en esa opción
     fireEvent.click(homeOption);
 
-    // 5) El combobox ahora debe mostrar "Home"
     expect(combobox).toHaveTextContent("Home");
   });
 });

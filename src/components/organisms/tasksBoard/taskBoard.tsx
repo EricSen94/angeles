@@ -5,19 +5,19 @@ import TaskCard from "../taskCard/taskCard";
 
 interface TaskBoardProps {
   tasksWithColor: TaskWithColor[];
-  onclick: (id: string) => void;
+  finishTask: (id: string) => void;
   showCompletedTask: boolean;
   setShowCompletedTask: (showCompletedTask: boolean) => void;
 }
 
 const TaskBoard = ({
   tasksWithColor,
-  onclick,
+  finishTask,
   showCompletedTask,
   setShowCompletedTask,
 }: TaskBoardProps) => {
   return (
-    <Grid size={7}>
+    <Grid size={7} data-testid="task-board">
       <Grid size={12}>
         <TaskCompletitionSelector
           showCompletedTask={showCompletedTask}
@@ -27,7 +27,7 @@ const TaskBoard = ({
       <Grid container spacing={2} sx={{ mt: 5 }} size={12}>
         {tasksWithColor.map((task, idx) => (
           <Grid size={6} key={task.id ?? idx}>
-            <TaskCard task={task} onclick={onclick} />
+            <TaskCard task={task} onclick={finishTask} />
           </Grid>
         ))}
       </Grid>

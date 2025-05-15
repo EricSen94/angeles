@@ -1,9 +1,18 @@
-import { Button, Grid, Typography } from "@mui/material";
 import { STRINGS } from "constans/strings";
+import { Button, Grid, Typography } from "@mui/material";
 
-const TaskHeader = () => {
+interface TaskHeaderProps {
+  addTask: () => void;
+}
+
+const TaskHeader = ({ addTask }: TaskHeaderProps) => {
   return (
-    <Grid container size={12} sx={{ marginBottom: "20px" }}>
+    <Grid
+      container
+      size={12}
+      sx={{ marginBottom: "20px" }}
+      data-testid="task-header"
+    >
       <Grid size={0.7} />
       <Grid
         size={5.3}
@@ -13,6 +22,7 @@ const TaskHeader = () => {
         }}
       >
         <Typography
+          data-testid="task-header-title"
           variant="h4"
           color="text.secondary"
           sx={{
@@ -27,12 +37,14 @@ const TaskHeader = () => {
       </Grid>
       <Grid size={4.5} sx={{ textAlign: "end" }}>
         <Button
+          data-testid="add-task-button"
           variant="contained"
           sx={{
             bgcolor: "#0D14D1",
 
             fontSize: "16",
           }}
+          onClick={addTask}
         >
           {STRINGS.addTask}
         </Button>

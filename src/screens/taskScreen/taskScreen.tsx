@@ -35,13 +35,18 @@ const TaskScreen = () => {
     );
   };
 
+  const handleAddTask = () => {
+    return null;
+  };
+
   return (
     <TaskTemplate
       tasksWithColor={tasks}
-      onclick={hanldeFinishTask}
+      finishTask={hanldeFinishTask}
       categories={categories}
       showCompletedTask={showCompletedTask}
       setShowCompletedTask={setShowCompletedTask}
+      addTask={handleAddTask}
     />
   );
 };

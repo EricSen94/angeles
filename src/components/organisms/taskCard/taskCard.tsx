@@ -17,6 +17,7 @@ const TaskCard = ({ task, onclick }: TaskCardProps) => {
         borderStyle: "solid",
         borderRadius: "8px",
       }}
+      data-testid="task-card"
     >
       <Grid size={12}>
         <TaskContent title={task.title} description={task.description} />
