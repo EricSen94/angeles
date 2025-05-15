@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.14",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
     "react": "^19.1.0",
@@ -23,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "test:ci": "jest --runInBand --ci"
   },
@@ -49,6 +50,18 @@
     "typescript": "^5.8.3"
   },
   "jest": {
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/src/.*\\.test\\.(js|jsx|ts|tsx)$",
+      "/src/reportWebVitals.js",
+      "/src/index.tsx",
+      "/src/store.tsx"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.test.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
     "coverageThreshold": {
       "global": {
         "branches": 80,

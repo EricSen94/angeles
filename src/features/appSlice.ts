@@ -15,7 +15,7 @@ export interface Task {
   completed: boolean
 }
 
-interface AppState {
+export interface AppState {
   categories: Category[]
   tasks: Task[]
 }

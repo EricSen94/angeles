@@ -1,12 +1,12 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "../../hooks";
+import { useAppSelector, useAppDispatch } from "../../../hooks";
 import {
   addCategory,
   addTask,
   removeCategory,
   removeTask,
-} from "../../features/appSlice";
-import { selectAllTasks, selectCategories } from "../../features/selectors";
+} from "../../../features/appSlice";
+import { selectAllTasks, selectCategories } from "../../../features/selectors";
 import {
   Box,
   Button,
@@ -42,8 +42,6 @@ export const CategoryList: React.FC = () => {
   };
 
   const handleAddTask = () => {
-    if (!taskTitle.trim() || !taskDescription.trim() || !taskCategorie.trim())
-      return;
     dispatch(
       addTask({
         title: taskTitle,
@@ -60,11 +58,11 @@ export const CategoryList: React.FC = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} data-testid="category-list-container">
       <Typography variant="h3">Categorías</Typography>
 
       {categories.map((cat) => (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} data-testid={"cat-row-" + cat.name}>
           <Grid size={6}>
             <Typography
               variant="body1"
@@ -76,6 +74,7 @@ export const CategoryList: React.FC = () => {
           </Grid>
           <Grid size={6}>
             <Button
+              data-testid={"cat-row-button-" + cat.name}
               variant="outlined"
               onClick={() => dispatch(removeCategory(cat.id))}
             >
@@ -89,21 +88,28 @@ export const CategoryList: React.FC = () => {
         <Grid size={12}>
           <Typography>Nombre</Typography>
           <TextField
+            data-testid="category-name-input"
             id="category-name"
             label=""
             variant="outlined"
+            value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </Grid>
         <Grid size={12}>
           <input
+            data-testid="category-color-input"
             type="color"
             value={color}
             onChange={(e) => setColor(e.target.value)}
           />
         </Grid>
         <Grid size={12}>
-          <Button onClick={handleAdd} variant="contained">
+          <Button
+            data-testid="add-category-button"
+            onClick={handleAdd}
+            variant="contained"
+          >
             Añadir categoría
           </Button>
         </Grid>
@@ -122,7 +128,12 @@ export const CategoryList: React.FC = () => {
                   <Typography variant="body1">
                     ({cat?.name ?? "Sin categoría"})
                   </Typography>
-                  <Button onClick={() => dispatch(removeTask(t.id))}>🗑</Button>
+                  <Button
+                    data-testid={"task-delete-button-" + t.title}
+                    onClick={() => dispatch(removeTask(t.id))}
+                  >
+                    🗑
+                  </Button>
                 </Grid>
               );
             })}
@@ -131,31 +142,52 @@ export const CategoryList: React.FC = () => {
             <Grid size={12}>
               <Typography> Titulo</Typography>
               <TextField
+                data-testid="task-title-input"
                 id="outlined-basic"
                 label=""
                 variant="outlined"
+                value={taskTitle}
                 onChange={(e) => setTaskTitle(e.target.value)}
               />
             </Grid>
             <Grid size={12}>
               <Typography> Descripccion</Typography>
               <TextField
+                data-testid="task-description-input"
                 id="outlined-basic"
                 label=""
                 variant="outlined"
+                value={taskDescription}
                 onChange={(e) => setTaskDecription(e.target.value)}
               />
             </Grid>
             <Grid size={12}>
               <Typography>Categoria</Typography>
-              <Select onChange={hanldeTaskCategorieSelect} sx={{ width: 100 }}>
+              <Select
+                data-testid="task-select-input"
+                value={taskCategorie}
+                onChange={hanldeTaskCategorieSelect}
+                sx={{ width: 100 }}
+                MenuProps={{
+                  PaperProps: {
+                    "data-testid": "task-select-listbox",
+                  },
+                }}
+              >
                 {categories.map((cat) => (
-                  <MenuItem value={cat.id}>{cat.name}</MenuItem>
+                  <MenuItem
+                    key={cat.id}
+                    value={cat.id}
+                    data-testid={`task-select-option-${cat.id}`}
+                  >
+                    {cat.name}
+                  </MenuItem>
                 ))}
               </Select>
             </Grid>
             <Grid size={12}>
               <Button
+                data-testid="add-task-button"
                 sx={{ backgroundColor: "green" }}
                 variant="contained"
                 onClick={handleAddTask}

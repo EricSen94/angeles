@@ -1,17 +1,18 @@
-// src/test-utils.tsx
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { render as rtlRender, RenderOptions } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { store } from "./store"; // ajusta la ruta si tu store está en otro lugar
+import { configureStore } from "@reduxjs/toolkit";
+import appReducer from "./features/appSlice";
 
-// Creamos un render que envuelve automáticamente en <Provider>
-export function render(
-  ui: ReactElement,
-  options?: Omit<RenderOptions, "queries">
-) {
+interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {}
+
+export function render(ui: ReactElement, options?: ExtendedRenderOptions) {
+  const store = configureStore({
+    reducer: { app: appReducer },
+  });
+
   return rtlRender(<Provider store={store}>{ui}</Provider>, options);
 }
 
-// Re-exportamos todo lo demás de Testing Library
 export * from "@testing-library/react";
 export { default as userEvent } from "@testing-library/user-event";
