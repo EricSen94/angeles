@@ -47,7 +47,6 @@ const AddTaskModal = ({
   const [description, setDescription] = useState("");
 
   useEffect(() => {
-    console.log(!name.trim() || !category.trim() || !description.trim());
   }, [name, category, description]);
 
   const handleSubmit = () => {
