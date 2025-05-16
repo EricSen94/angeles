@@ -13,10 +13,6 @@ const TaskCompletitionSelector = ({
 }: TaskCompletitionSelectorProps) => {
   const theme = useTheme();
 
-  useEffect(() => {
-    console.log(showCompletedTask);
-  }, [showCompletedTask]);
-
   return (
     <Box
       data-testid="task-completition-selector"
