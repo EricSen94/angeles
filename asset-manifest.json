@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/angeles/static/css/main.dc4d6ff2.css",
-    "main.js": "/angeles/static/js/main.37ddabd7.js",
+    "main.js": "/angeles/static/js/main.142ac511.js",
     "index.html": "/angeles/index.html",
     "main.dc4d6ff2.css.map": "/angeles/static/css/main.dc4d6ff2.css.map",
-    "main.37ddabd7.js.map": "/angeles/static/js/main.37ddabd7.js.map"
+    "main.142ac511.js.map": "/angeles/static/js/main.142ac511.js.map"
   },
   "entrypoints": [
     "static/css/main.dc4d6ff2.css",
-    "static/js/main.37ddabd7.js"
+    "static/js/main.142ac511.js"
   ]
 }
